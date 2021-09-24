@@ -3,7 +3,7 @@ using Mirror;
 using UnityEngine.InputSystem;
 using System;
 
-public class PlayerMovementController : NetworkBehaviour
+public class PlayerController : NetworkBehaviour
 {
     [SerializeField] float _movementSpeed = 5f;
     [SerializeField] Animator _animator;
@@ -41,7 +41,12 @@ public class PlayerMovementController : NetworkBehaviour
     private void OnDisable() => Controls.Disable();
 
     [Client]
-    private void Update() => Move();
+    private void Update()
+    {
+        if (!hasAuthority)
+            return;
+        Move();
+    }
 
     private void SetMovement(Vector2 movement)
     {
