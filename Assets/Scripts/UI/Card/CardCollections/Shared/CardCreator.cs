@@ -8,7 +8,9 @@ public class CardCreator
         GameObject newCard = GameObject.Instantiate(prefab, parent.position, Quaternion.identity, parent);
 
         // feed card data to the display fields
-        newCard.GetComponent<CardController>().DisplayCardData();
+        CardController controller = newCard.GetComponent<CardController>();
+        controller.DisplayCardData();
+        controller.QuickFlip(); // this flips newly created card face down
 
         return newCard;
     }

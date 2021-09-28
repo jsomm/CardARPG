@@ -9,6 +9,7 @@ public class PlayerDiscardManager : CardCollectionBase
     public List<CardController> CardsInDiscard;
 
     [Header("References")]
+    [SerializeField] PlayerDeckManager _playerDeck;
     [SerializeField] Transform _cardsInDiscardParentObject; // this is for organization in the hierarchy
     [SerializeField] TMP_Text _discardCountText;
 
@@ -19,21 +20,20 @@ public class PlayerDiscardManager : CardCollectionBase
 
     public override bool AddCardToCollection(CardController cardToAdd)
     {
-        // add card data
-        CardsInDiscard.Add(cardToAdd);
-
         // set parent for organization
         cardToAdd.gameObject.transform.SetParent(_cardsInDiscardParentObject);
 
-        // flip card to back side and disable to hide from the UI
-        if (cardToAdd.IsFaceUp)
-            cardToAdd.FlipCard();
+        // add card data
+        CardsInDiscard.Add(cardToAdd);
+
+        // set inactive to hide card
         cardToAdd.gameObject.SetActive(false);
 
         UpdateCardCount();
 
         return true;
     }
+
     public override bool RemoveCardFromCollection(CardController cardToRemove)
     {
         if (CardsInDiscard.Contains(cardToRemove))
@@ -48,13 +48,14 @@ public class PlayerDiscardManager : CardCollectionBase
 
     void UpdateCardCount() => _discardCountText.text = CardsInDiscard.Count.ToString();
 
-    public List<CardController> ReturnCardsToDeck()
+    public void ReturnCardsToDeck()
     {
         List<CardController> cardReturnList = CardsInDiscard.GetRange(0, CardsInDiscard.Count); // clone the list so we can remove all the old elements and still return them to the deck
         foreach (CardController card in cardReturnList)
+        {
+            _playerDeck.AddCardToCollection(card);
             RemoveCardFromCollection(card);
-
-        return cardReturnList;
+        }
     }
 
 }

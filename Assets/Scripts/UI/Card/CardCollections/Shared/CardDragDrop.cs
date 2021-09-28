@@ -15,8 +15,7 @@ public class CardDragDrop : MonoBehaviour, IPointerDownHandler, IBeginDragHandle
         _canvas = GetComponentInParent<Canvas>();
         _canvasGroup = GetComponent<CanvasGroup>();
         _rectTransform = GetComponent<RectTransform>();
-        StartPos = transform.position;
-        AllowDragging = false;
+        ResetValues();
     }
 
     public void OnPointerDown(PointerEventData eventData)
@@ -50,5 +49,11 @@ public class CardDragDrop : MonoBehaviour, IPointerDownHandler, IBeginDragHandle
     {
         if (AllowDragging)
             _rectTransform.anchoredPosition += eventData.delta / _canvas.scaleFactor;
+    }
+
+    public void ResetValues()
+    {
+        StartPos = transform.position;
+        AllowDragging = false;
     }
 }

@@ -33,6 +33,46 @@ public class @Controls : IInputActionCollection, IDisposable
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """"
+                },
+                {
+                    ""name"": ""AbilityOne"",
+                    ""type"": ""Button"",
+                    ""id"": ""9b07f307-6d8c-4e4a-85a4-4d9b54b9ff1b"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""AbilityTwo"",
+                    ""type"": ""Button"",
+                    ""id"": ""49c77f98-32e2-498b-8a43-db63c885157b"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""AbilityThree"",
+                    ""type"": ""Button"",
+                    ""id"": ""906015b8-af29-409f-825e-1ad9a9723109"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""AbilityFour"",
+                    ""type"": ""Button"",
+                    ""id"": ""ce3cc3c4-3a1f-4e83-bc5d-a821629d5a76"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""LeftClick"",
+                    ""type"": ""Button"",
+                    ""id"": ""91acbf73-1ba9-4667-8ee8-5b2e7483e6e8"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
                 }
             ],
             ""bindings"": [
@@ -101,6 +141,61 @@ public class @Controls : IInputActionCollection, IDisposable
                     ""action"": ""Shoot"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""6c639ced-30f9-4437-95b1-fef18f4a187f"",
+                    ""path"": ""<Keyboard>/1"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""AbilityOne"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""4a632e94-c809-425b-9c3e-b2f3a0822365"",
+                    ""path"": ""<Keyboard>/2"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""AbilityTwo"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""1026d82b-e957-47b7-9e04-1e011fc13f42"",
+                    ""path"": ""<Keyboard>/3"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""AbilityThree"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""c6dc14d1-696e-456b-afa5-42973ea53942"",
+                    ""path"": ""<Keyboard>/4"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""AbilityFour"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""f50176ed-0e88-4f6e-acb6-19d7002d03bb"",
+                    ""path"": ""<Mouse>/leftButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""LeftClick"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -128,6 +223,11 @@ public class @Controls : IInputActionCollection, IDisposable
         m_PlayerControls = asset.FindActionMap("PlayerControls", throwIfNotFound: true);
         m_PlayerControls_Movement = m_PlayerControls.FindAction("Movement", throwIfNotFound: true);
         m_PlayerControls_Shoot = m_PlayerControls.FindAction("Shoot", throwIfNotFound: true);
+        m_PlayerControls_AbilityOne = m_PlayerControls.FindAction("AbilityOne", throwIfNotFound: true);
+        m_PlayerControls_AbilityTwo = m_PlayerControls.FindAction("AbilityTwo", throwIfNotFound: true);
+        m_PlayerControls_AbilityThree = m_PlayerControls.FindAction("AbilityThree", throwIfNotFound: true);
+        m_PlayerControls_AbilityFour = m_PlayerControls.FindAction("AbilityFour", throwIfNotFound: true);
+        m_PlayerControls_LeftClick = m_PlayerControls.FindAction("LeftClick", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -179,12 +279,22 @@ public class @Controls : IInputActionCollection, IDisposable
     private IPlayerControlsActions m_PlayerControlsActionsCallbackInterface;
     private readonly InputAction m_PlayerControls_Movement;
     private readonly InputAction m_PlayerControls_Shoot;
+    private readonly InputAction m_PlayerControls_AbilityOne;
+    private readonly InputAction m_PlayerControls_AbilityTwo;
+    private readonly InputAction m_PlayerControls_AbilityThree;
+    private readonly InputAction m_PlayerControls_AbilityFour;
+    private readonly InputAction m_PlayerControls_LeftClick;
     public struct PlayerControlsActions
     {
         private @Controls m_Wrapper;
         public PlayerControlsActions(@Controls wrapper) { m_Wrapper = wrapper; }
         public InputAction @Movement => m_Wrapper.m_PlayerControls_Movement;
         public InputAction @Shoot => m_Wrapper.m_PlayerControls_Shoot;
+        public InputAction @AbilityOne => m_Wrapper.m_PlayerControls_AbilityOne;
+        public InputAction @AbilityTwo => m_Wrapper.m_PlayerControls_AbilityTwo;
+        public InputAction @AbilityThree => m_Wrapper.m_PlayerControls_AbilityThree;
+        public InputAction @AbilityFour => m_Wrapper.m_PlayerControls_AbilityFour;
+        public InputAction @LeftClick => m_Wrapper.m_PlayerControls_LeftClick;
         public InputActionMap Get() { return m_Wrapper.m_PlayerControls; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -200,6 +310,21 @@ public class @Controls : IInputActionCollection, IDisposable
                 @Shoot.started -= m_Wrapper.m_PlayerControlsActionsCallbackInterface.OnShoot;
                 @Shoot.performed -= m_Wrapper.m_PlayerControlsActionsCallbackInterface.OnShoot;
                 @Shoot.canceled -= m_Wrapper.m_PlayerControlsActionsCallbackInterface.OnShoot;
+                @AbilityOne.started -= m_Wrapper.m_PlayerControlsActionsCallbackInterface.OnAbilityOne;
+                @AbilityOne.performed -= m_Wrapper.m_PlayerControlsActionsCallbackInterface.OnAbilityOne;
+                @AbilityOne.canceled -= m_Wrapper.m_PlayerControlsActionsCallbackInterface.OnAbilityOne;
+                @AbilityTwo.started -= m_Wrapper.m_PlayerControlsActionsCallbackInterface.OnAbilityTwo;
+                @AbilityTwo.performed -= m_Wrapper.m_PlayerControlsActionsCallbackInterface.OnAbilityTwo;
+                @AbilityTwo.canceled -= m_Wrapper.m_PlayerControlsActionsCallbackInterface.OnAbilityTwo;
+                @AbilityThree.started -= m_Wrapper.m_PlayerControlsActionsCallbackInterface.OnAbilityThree;
+                @AbilityThree.performed -= m_Wrapper.m_PlayerControlsActionsCallbackInterface.OnAbilityThree;
+                @AbilityThree.canceled -= m_Wrapper.m_PlayerControlsActionsCallbackInterface.OnAbilityThree;
+                @AbilityFour.started -= m_Wrapper.m_PlayerControlsActionsCallbackInterface.OnAbilityFour;
+                @AbilityFour.performed -= m_Wrapper.m_PlayerControlsActionsCallbackInterface.OnAbilityFour;
+                @AbilityFour.canceled -= m_Wrapper.m_PlayerControlsActionsCallbackInterface.OnAbilityFour;
+                @LeftClick.started -= m_Wrapper.m_PlayerControlsActionsCallbackInterface.OnLeftClick;
+                @LeftClick.performed -= m_Wrapper.m_PlayerControlsActionsCallbackInterface.OnLeftClick;
+                @LeftClick.canceled -= m_Wrapper.m_PlayerControlsActionsCallbackInterface.OnLeftClick;
             }
             m_Wrapper.m_PlayerControlsActionsCallbackInterface = instance;
             if (instance != null)
@@ -210,6 +335,21 @@ public class @Controls : IInputActionCollection, IDisposable
                 @Shoot.started += instance.OnShoot;
                 @Shoot.performed += instance.OnShoot;
                 @Shoot.canceled += instance.OnShoot;
+                @AbilityOne.started += instance.OnAbilityOne;
+                @AbilityOne.performed += instance.OnAbilityOne;
+                @AbilityOne.canceled += instance.OnAbilityOne;
+                @AbilityTwo.started += instance.OnAbilityTwo;
+                @AbilityTwo.performed += instance.OnAbilityTwo;
+                @AbilityTwo.canceled += instance.OnAbilityTwo;
+                @AbilityThree.started += instance.OnAbilityThree;
+                @AbilityThree.performed += instance.OnAbilityThree;
+                @AbilityThree.canceled += instance.OnAbilityThree;
+                @AbilityFour.started += instance.OnAbilityFour;
+                @AbilityFour.performed += instance.OnAbilityFour;
+                @AbilityFour.canceled += instance.OnAbilityFour;
+                @LeftClick.started += instance.OnLeftClick;
+                @LeftClick.performed += instance.OnLeftClick;
+                @LeftClick.canceled += instance.OnLeftClick;
             }
         }
     }
@@ -227,5 +367,10 @@ public class @Controls : IInputActionCollection, IDisposable
     {
         void OnMovement(InputAction.CallbackContext context);
         void OnShoot(InputAction.CallbackContext context);
+        void OnAbilityOne(InputAction.CallbackContext context);
+        void OnAbilityTwo(InputAction.CallbackContext context);
+        void OnAbilityThree(InputAction.CallbackContext context);
+        void OnAbilityFour(InputAction.CallbackContext context);
+        void OnLeftClick(InputAction.CallbackContext context);
     }
 }

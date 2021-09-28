@@ -20,6 +20,9 @@ public class PlayerHandManager : CardCollectionBase
         // do we have room in hand for this card?
         if (targetSlot != null)
         {
+            // set active so the card is visible
+            cardToAdd.gameObject.SetActive(true);
+
             // add data to list of cards in hand
             CardsInHand.Add(cardToAdd);
 
@@ -29,12 +32,7 @@ public class PlayerHandManager : CardCollectionBase
             dragDrop.CurrentSlot = targetSlot;
             dragDrop.AllowDragging = true;
 
-            // tell the card about the slot and arrange it on the screen
-            cardToAdd.CurrentSlot = targetSlot;
-            cardToAdd.transform.SetParent(targetSlot.transform);
-            cardToAdd.gameObject.SetActive(true); // set active so the card is visible
-
-            // tell the target slot about the card
+            // place card in the target slot
             targetSlot.PlaceCardInSlot(cardToAdd);
 
             // little flip animation as it enters the hand
@@ -50,9 +48,12 @@ public class PlayerHandManager : CardCollectionBase
     {
         if (CardsInHand.Contains(cardToRemove))
         {
+            // flip card face down
+            cardToRemove.QuickFlip();
+
             // remove the card from the hand slot, the hand data list, and send it to the discard pile
             cardToRemove.CurrentSlot.RemoveCardFromSlot();
-            CardsInHand.Remove(cardToRemove);
+            CardsInHand.Remove(cardToRemove);            
 
             // send the card to the discard pile
             _playerDiscard.AddCardToCollection(cardToRemove);

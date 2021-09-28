@@ -52,6 +52,9 @@ class PlayerDeckManager : CardCollectionBase
                 newCard = cardCreator.CreateCardObject(PrefabsInTestDeck[currentCardIndex], _cardsInDeckParentObject);
             }
 
+            // disable to hide card
+            newCard.SetActive(false);
+
             // add data to collection
             AddCardToCollection(newCard.GetComponent<CardController>());
         }
@@ -84,7 +87,7 @@ class PlayerDeckManager : CardCollectionBase
             }
 
             // now shuffle in the discard pile
-            CardsInDeck = _playerDiscard.ReturnCardsToDeck();
+            _playerDiscard.ReturnCardsToDeck();
             Shuffle();
             UpdateCardCount();
         }
@@ -105,11 +108,11 @@ class PlayerDeckManager : CardCollectionBase
 
     public override bool AddCardToCollection(CardController cardToAdd)
     {
+        // set parent
+        cardToAdd.transform.SetParent(_cardsInDeckParentObject);
+
         // add card data
         CardsInDeck.Add(cardToAdd);
-
-        // hide the card from the UI
-        cardToAdd.gameObject.SetActive(false);
 
         // set deck counter text
         UpdateCardCount();

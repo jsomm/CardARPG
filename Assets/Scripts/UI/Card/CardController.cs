@@ -29,9 +29,15 @@ public class CardController : MonoBehaviour
     public CardDragDrop DragDrop { get => _dragDrop; }
     public CardUISlot CurrentSlot { get; set; }
 
-
     // local variables
     bool _cardFlipCoroutineAllowed = true;
+
+    public void QuickFlip()
+    {
+        // use this to flip without animation
+        _cardBack.SetActive(!_cardBack.activeSelf);
+        _cardFront.SetActive(!_cardBack.activeSelf);
+    }
 
     public void FlipCard()
     {
@@ -59,10 +65,10 @@ public class CardController : MonoBehaviour
         }
         else
         {
-            for (float i = -180f; i >= 0f; i += 10f)
+            for (float i = -180f; i <= 0f; i += 10f)
             {
                 transform.rotation = Quaternion.Euler(0f, i, 0f);
-                if (i == 90f)
+                if (i == -90f)
                 {
                     _cardFront.SetActive(false);
                     _cardBack.SetActive(true);

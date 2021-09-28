@@ -2,7 +2,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 public class CardUISlot : MonoBehaviour, IDropHandler
 {
-    public CardController CardCurrentlyInSlot;    
+    public CardController CardCurrentlyInSlot;
 
     public void OnDrop(PointerEventData eventData)
     {
@@ -18,6 +18,7 @@ public class CardUISlot : MonoBehaviour, IDropHandler
         CardDragDrop dragDrop = card.DragDrop;
         if (dragDrop.AllowDragging)
         {
+            card.transform.SetParent(transform);
             CardCurrentlyInSlot = card;
             CardCurrentlyInSlot.CurrentSlot = this;
             dragDrop.DroppedOnSlot = true;

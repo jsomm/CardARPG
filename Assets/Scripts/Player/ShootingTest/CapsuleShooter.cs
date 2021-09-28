@@ -32,7 +32,7 @@ public class CapsuleShooter : NetworkBehaviour
 
     // this is called on the server
     [Command]
-    void CmdFire()
+    public void CmdFire()
     {
         GameObject projectile = Instantiate(_projectilePrefab, _projectileOrigin.position, _projectileOrigin.rotation);
         NetworkServer.Spawn(projectile);
@@ -42,6 +42,7 @@ public class CapsuleShooter : NetworkBehaviour
     [ClientRpc]
     void RpcOnFire()
     {
-        _animator.SetTrigger("Jump");
+        // animate here
+        //_animator.SetTrigger("Jump");
     }
 }
