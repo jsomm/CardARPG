@@ -1,14 +1,19 @@
-﻿using UnityEngine;
+﻿using Mirror;
+
+using UnityEngine;
 
 [CreateAssetMenu(fileName = "New Ranged Projectile Card", menuName = "Cards/Ranged Projectile Card Data")]
 class RangedProjectileCard : CardData
 {
-    public GameObject Projectile;
+    public int ProjectileID;
     public CardIndicatorType Indicator;
 
-    public RangedProjectileCard()
+    public RangedProjectileCard() => IndicatorType = Indicator;
+
+    public override CardNetworkData GetNetworkData(CardNetworkData data)
     {
-        IndicatorType = Indicator;
+        data.ProjectileID = ProjectileID;
+        return base.GetNetworkData(data);
     }
 }
 

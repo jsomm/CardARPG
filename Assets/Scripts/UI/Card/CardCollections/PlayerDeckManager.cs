@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+
 using TMPro;
 
 using UnityEngine;
@@ -14,32 +15,33 @@ class PlayerDeckManager : CardCollectionBase
     [SerializeField] PlayerDiscardManager _playerDiscard;
 
     [Header("Debug")]
-    public List<GameObject> PrefabsInTestDeck;
+    public List<CardData> TestDeckDatas;
 
     System.Random _rng;
 
     private void Start()
     {
         _rng = new System.Random();
+        TestDeckDatas.Add(Resources.Load<CardData>("Cards/CardData/RangedProjectile/Capsule Shot Green"));
         BuildTestDeck();
     }
 
     private void BuildTestDeck()
     {
         CardCreator cardCreator = new CardCreator();
-        int remainder = 10 % PrefabsInTestDeck.Count;
-        int numOfEachCard = 10 / PrefabsInTestDeck.Count;
+        int remainder = 10 % TestDeckDatas.Count;
+        int numOfEachCard = 10 / TestDeckDatas.Count;
         int numCreated = 0;
         int currentCardIndex = 0;
 
-        // create a ten card deck out of the cards in PrefabsInTestDeck
+        // create a ten card deck out of the cards in TestDeckDatas
         for (int i = 0; i < 10; i++)
         {
             GameObject newCard;
 
             // make the remainders first
             if (i < remainder)
-                newCard = cardCreator.CreateCardObject(PrefabsInTestDeck[_rng.Next(PrefabsInTestDeck.Count)], _cardsInDeckParentObject); // remainders will just be randomized from all available cards
+                newCard = cardCreator.CreateCardObject(TestDeckDatas[_rng.Next(TestDeckDatas.Count)], _cardsInDeckParentObject); // remainders will just be randomized from all available cards
             else
             {
                 if (numCreated != numOfEachCard)
@@ -49,7 +51,7 @@ class PlayerDeckManager : CardCollectionBase
                     numCreated = 0;
                     currentCardIndex++;
                 }
-                newCard = cardCreator.CreateCardObject(PrefabsInTestDeck[currentCardIndex], _cardsInDeckParentObject);
+                newCard = cardCreator.CreateCardObject(TestDeckDatas[currentCardIndex], _cardsInDeckParentObject);
             }
 
             // disable to hide card

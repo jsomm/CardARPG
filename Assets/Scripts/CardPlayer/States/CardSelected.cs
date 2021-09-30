@@ -59,13 +59,13 @@ public class CardSelected : CardPlayerState
     private void PlayCardInSlot()
     {
         // get info needed to play the card
-        CardData cardData = CardPlayer.LastSlotPressed.CardCurrentlyInSlot.CardData;
+        CardNetworkData data = CardPlayer.LastSlotPressed.CardCurrentlyInSlot.CardData.GetNetworkData(new CardNetworkData());
 
         // use mana
         // CardPlayer.ResourceBarManager.ChangeResource(CardPlayer.ResourceBarManager.ManaBar, cardData.Cost);
 
         // play the card
-        CardPlayer.CapsuleShooter.CmdFire();
+        CardPlayer.CmdPlayCard(data);
 
         // remove the card from the hand
         CardPlayer.PlayerHand.RemoveCardFromCollection(CardPlayer.LastSlotPressed.CardCurrentlyInSlot);

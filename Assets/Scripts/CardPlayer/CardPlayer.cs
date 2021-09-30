@@ -10,9 +10,6 @@ public class CardPlayer : CardPlayerStateMachine
     public PlayerAbilityTargetingManager TargetingManager;
     public Transform ProjectileOrigin;
 
-    [Header("Debug")]
-    public CapsuleShooter CapsuleShooter;
-
     private PlayerHandManager _playerHand;
     private CardUISlot _lastSlotPressed = null;
 
@@ -73,4 +70,11 @@ public class CardPlayer : CardPlayerStateMachine
         return null;
     }
 
+    [Command]
+    public void CmdPlayCard(CardNetworkData card)
+    {        
+        GameObject prefab = NetworkManager.singleton.spawnPrefabs[card.ProjectileID];
+        GameObject projectile = Instantiate(prefab, ProjectileOrigin.position, ProjectileOrigin.rotation);
+        NetworkServer.Spawn(projectile);
+    }
 }

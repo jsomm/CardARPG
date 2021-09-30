@@ -1498,6 +1498,7 @@ MonoBehaviour:
   playerSpawnMethod: 1
   spawnPrefabs:
   - {fileID: 898273679843977332, guid: a3d892ca6ad6f914eb05613ce0e60cb7, type: 3}
+  - {fileID: 898273679843977332, guid: 04c495bc1698cfb46893d127259dfddf, type: 3}
 --- !u!4 &1645900572
 Transform:
   m_ObjectHideFlags: 0
@@ -2084,8 +2085,7 @@ MonoBehaviour:
   _cardsInDeckParentObject: {fileID: 1702306485728486268}
   _playerHand: {fileID: 480304699}
   _playerDiscard: {fileID: 185653510}
-  PrefabsInTestDeck:
-  - {fileID: 8841933955364811162, guid: cfe17e773c70f93419438457fc992094, type: 3}
+  TestDeckDatas: []
 --- !u!1 &1702306486352523412
 GameObject:
   m_ObjectHideFlags: 0

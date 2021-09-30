@@ -16,15 +16,16 @@ public class CardController : MonoBehaviour
     [SerializeField] CardData _cardData;
     [SerializeField] CardDragDrop _dragDrop;
 
-    [Header("Debug")]
-    [SerializeField] CardData _defaultCardData;
-
     // properties
     public bool IsFaceUp => _cardFront.activeSelf;
     public CardData CardData
     {
-        get => _cardData ?? _defaultCardData;
-        set => _cardData = value;
+        get => _cardData ?? Resources.Load<CardData>("Cards/_Default");
+        set
+        {
+            _cardData = value;
+            DisplayCardData();
+        }
     }
     public CardDragDrop DragDrop { get => _dragDrop; }
     public CardUISlot CurrentSlot { get; set; }
@@ -86,9 +87,9 @@ public class CardController : MonoBehaviour
         _title.text = CardData.Title;
         _description.text = CardData.DescriptionText;
         _cost.text = CardData.Cost.ToString();
-        if (CardData.CardArt != null)
-            _image.sprite = CardData.CardArt;
-        else
+        //if (CardData.CardArt != null)
+        //    _image.sprite = CardData.CardArt;
+        //else
             _image.gameObject.SetActive(false);
     }
 }
