@@ -13,10 +13,7 @@ public class PlayerDiscardManager : CardCollectionBase
     [SerializeField] Transform _cardsInDiscardParentObject; // this is for organization in the hierarchy
     [SerializeField] TMP_Text _discardCountText;
 
-    private void Start()
-    {
-        UpdateCardCount();
-    }
+    private void Start() => UpdateCardCount();
 
     public override bool AddCardToCollection(CardController cardToAdd)
     {
@@ -57,5 +54,4 @@ public class PlayerDiscardManager : CardCollectionBase
             RemoveCardFromCollection(card);
         }
     }
-
 }

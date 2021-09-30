@@ -9,14 +9,7 @@ public class CapsuleShooter : NetworkBehaviour
     [SerializeField] Transform _projectileOrigin;
 
     Controls _controls;
-    public Controls Controls
-    {
-        get
-        {
-            if (_controls != null) { return _controls; }
-            return _controls = new Controls();
-        }
-    }
+    public Controls Controls => _controls ??= new Controls();
 
     public override void OnStartAuthority()
     {

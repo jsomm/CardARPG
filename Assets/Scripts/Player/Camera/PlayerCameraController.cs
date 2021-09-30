@@ -17,6 +17,5 @@ namespace MovementPlayground
             CinemachineVirtualCamera cam = Instantiate(_cameraPrefab, transform.position, Quaternion.identity, null).GetComponentInChildren<CinemachineVirtualCamera>();
             cam.Follow = _followTarget;
         }
-
     }
 }

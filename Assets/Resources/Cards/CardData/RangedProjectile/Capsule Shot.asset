@@ -17,5 +17,6 @@ MonoBehaviour:
   Cost: 1
   CardArt: {fileID: 21300000, guid: a92713821d7b2c642913d0faa350b57e, type: 3}
   RangeModifier: 1
+  Type: 1
   Projectile: {fileID: 898273679843977332, guid: a3d892ca6ad6f914eb05613ce0e60cb7, type: 3}
   Indicator: 0

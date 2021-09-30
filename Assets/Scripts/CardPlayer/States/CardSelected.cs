@@ -70,6 +70,5 @@ public class CardSelected : CardPlayerState
         // remove the card from the hand
         CardPlayer.PlayerHand.RemoveCardFromCollection(CardPlayer.LastSlotPressed.CardCurrentlyInSlot);
     }
-
 }
 

@@ -51,6 +51,7 @@ class PlayerDeckManager : CardCollectionBase
                     numCreated = 0;
                     currentCardIndex++;
                 }
+
                 newCard = cardCreator.CreateCardObject(TestDeckDatas[currentCardIndex], _cardsInDeckParentObject);
             }
 

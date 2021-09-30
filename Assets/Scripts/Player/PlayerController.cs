@@ -15,14 +15,7 @@ public class PlayerController : NetworkBehaviour
     bool _isMovementPressed = false;
 
     Controls _controls;
-    public Controls Controls
-    {
-        get
-        {
-            if (_controls != null) { return _controls; }
-            return _controls = new Controls();
-        }
-    }
+    public Controls Controls => _controls ??= new Controls();
 
     public override void OnStartAuthority()
     {
@@ -62,7 +55,7 @@ public class PlayerController : NetworkBehaviour
 
     private void Move()
     {
-        _characterController.Move(_previousInput * _movementSpeed * Time.deltaTime);
+        _characterController.Move(_movementSpeed * Time.deltaTime * _previousInput);
         if (_isMovementPressed)
         {
             HandleRotation();
@@ -86,9 +79,7 @@ public class PlayerController : NetworkBehaviour
         _animator.gameObject.transform.rotation = transform.rotation;
     }
 
-    private void HandleAnimation()
-    {
+    private void HandleAnimation() =>
         // more complicated move animations could go here, but this is all we need for now
         _animator.SetBool(_isRunningHash, _isMovementPressed);
-    }
 }

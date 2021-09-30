@@ -10,7 +10,7 @@ public class PlayerAbilityTargetingManager : NetworkBehaviour
     [SerializeField] Image _skillshotImage, _rangeIndicatorImage;
     [SerializeField] Transform _aoeIndicatorTransform;
 
-    public Transform AoeIndicatorTransform { get { return _aoeIndicatorTransform; } }
+    public Transform AoeIndicatorTransform => _aoeIndicatorTransform;
 
     float _radiusOfRange;
 
@@ -76,19 +76,9 @@ public class PlayerAbilityTargetingManager : NetworkBehaviour
         _indicatorCanvas.transform.localScale = new Vector3(currentScale.x * rangeModifier, currentScale.y, currentScale.z * rangeModifier);
     }
 
-    private void ShowSkillshot(bool show)
-    {
-        _skillshotImage.gameObject.SetActive(show);
-    }
-    private void ShowAOE(bool show)
-    {
-        _aoeIndicatorTransform.gameObject.SetActive(show);
-    }
-
-    private void ShowRange(bool show)
-    {
-        _rangeIndicatorImage.gameObject.SetActive(show);
-    }
+    private void ShowSkillshot(bool show) => _skillshotImage.gameObject.SetActive(show);
+    private void ShowAOE(bool show) => _aoeIndicatorTransform.gameObject.SetActive(show);
+    private void ShowRange(bool show) => _rangeIndicatorImage.gameObject.SetActive(show);
 
 }
 

@@ -20,14 +20,14 @@ public class CardController : MonoBehaviour
     public bool IsFaceUp => _cardFront.activeSelf;
     public CardData CardData
     {
-        get => _cardData ?? Resources.Load<CardData>("Cards/_Default");
+        get => _cardData != null ? _cardData : Resources.Load<CardData>("Cards/_Default");
         set
         {
             _cardData = value;
             DisplayCardData();
         }
     }
-    public CardDragDrop DragDrop { get => _dragDrop; }
+    public CardDragDrop DragDrop => _dragDrop;
     public CardUISlot CurrentSlot { get; set; }
 
     // local variables
@@ -87,9 +87,9 @@ public class CardController : MonoBehaviour
         _title.text = CardData.Title;
         _description.text = CardData.DescriptionText;
         _cost.text = CardData.Cost.ToString();
-        //if (CardData.CardArt != null)
-        //    _image.sprite = CardData.CardArt;
-        //else
+        if (CardData.CardArt != null)
+            _image.sprite = CardData.CardArt;
+        else
             _image.gameObject.SetActive(false);
     }
 }

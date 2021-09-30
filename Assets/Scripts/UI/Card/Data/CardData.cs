@@ -9,9 +9,9 @@ public partial class CardData : ScriptableObject
     public int Cost;
     public Sprite CardArt;
     public float RangeModifier = 1;
+    public CardType Type;
 
     public CardIndicatorType IndicatorType { get; protected set; }
-    public CardType Type { get; protected set; }
 
     public virtual CardNetworkData GetNetworkData(CardNetworkData data)
     {

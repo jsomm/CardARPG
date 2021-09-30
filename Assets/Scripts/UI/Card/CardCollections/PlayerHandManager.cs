@@ -11,7 +11,6 @@ public class PlayerHandManager : CardCollectionBase
     public List<CardController> CardsInHand;
     public List<CardUISlot> CardSlots;
 
-
     public override bool AddCardToCollection(CardController cardToAdd)
     {
         // find the first unoccupied slot to put the new card in

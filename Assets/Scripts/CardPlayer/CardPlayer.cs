@@ -1,3 +1,5 @@
+using System;
+
 using Mirror;
 
 using UnityEngine;
@@ -17,14 +19,7 @@ public class CardPlayer : CardPlayerStateMachine
     public PlayerHandManager PlayerHand { get => _playerHand; set => _playerHand = value; }
 
     Controls _controls;
-    public Controls Controls
-    {
-        get
-        {
-            if (_controls != null) { return _controls; }
-            return _controls = new Controls();
-        }
-    }
+    public Controls Controls => _controls ??= new Controls();
 
     public override void OnStartAuthority()
     {
@@ -72,9 +67,32 @@ public class CardPlayer : CardPlayerStateMachine
 
     [Command]
     public void CmdPlayCard(CardNetworkData card)
-    {        
+    {
+        switch (card.Type)
+        {
+            case CardData.CardType.RangedProjectile:
+                PlayRangedProjectileCard(card);
+                break;
+            case CardData.CardType.RangedAOE:
+                PlayRangedAOECard(card);
+                break;
+            case CardData.CardType.Buff:
+                PlayBuffCard(card);
+                break;
+        }
+    }
+
+    [Server]
+    private void PlayRangedProjectileCard(CardNetworkData card)
+    {
         GameObject prefab = NetworkManager.singleton.spawnPrefabs[card.ProjectileID];
         GameObject projectile = Instantiate(prefab, ProjectileOrigin.position, ProjectileOrigin.rotation);
         NetworkServer.Spawn(projectile);
     }
+
+    [Server]
+    private void PlayRangedAOECard(CardNetworkData card) => throw new NotImplementedException();
+
+    [Server]
+    private void PlayBuffCard(CardNetworkData card) => throw new NotImplementedException();
 }

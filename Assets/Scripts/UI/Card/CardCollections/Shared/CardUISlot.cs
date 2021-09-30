@@ -31,8 +31,5 @@ public class CardUISlot : MonoBehaviour, IDropHandler
         }
     }
 
-    public void RemoveCardFromSlot()
-    {
-        CardCurrentlyInSlot = null;
-    }
+    public void RemoveCardFromSlot() => CardCurrentlyInSlot = null;
 }
