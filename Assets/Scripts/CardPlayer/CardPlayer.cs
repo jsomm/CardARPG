@@ -91,7 +91,15 @@ public class CardPlayer : CardPlayerStateMachine
     }
 
     [Server]
-    private void PlayRangedAOECard(CardNetworkData card) => throw new NotImplementedException();
+    private void PlayRangedAOECard(CardNetworkData card)
+    {
+        GameObject prefab = NetworkManager.singleton.spawnPrefabs[card.ProjectileID];
+        Vector3 targetPosition = TargetingManager.AoeIndicatorTransform.position;
+        targetPosition.y = 0;
+
+        GameObject projectile = Instantiate(prefab, targetPosition, TargetingManager.AoeIndicatorTransform.rotation);
+        NetworkServer.Spawn(projectile);
+    }
 
     [Server]
     private void PlayBuffCard(CardNetworkData card) => throw new NotImplementedException();

@@ -257,6 +257,7 @@ GameObject:
   - component: {fileID: 4613425368225353354}
   - component: {fileID: 7824206419701487464}
   - component: {fileID: 7024489152738092826}
+  - component: {fileID: 268576527919716161}
   - component: {fileID: 6704791337475181913}
   - component: {fileID: 2703598044193703794}
   - component: {fileID: 3654304057529457781}
@@ -366,6 +367,36 @@ MonoBehaviour:
   showOverlay: 0
   overlayColor: {r: 0, g: 0, b: 0, a: 0.5}
   target: {fileID: 5703433060494341136}
+--- !u!114 &268576527919716161
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 803845908290828281}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 734b48bea0b204338958ee3d885e11f0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  syncMode: 0
+  syncInterval: 0.1
+  clientAuthority: 1
+  sendInterval: 0.05
+  syncPosition: 1
+  syncRotation: 1
+  syncScale: 0
+  interpolatePosition: 1
+  interpolateRotation: 1
+  interpolateScale: 1
+  bufferTimeMultiplier: 3
+  bufferSizeLimit: 64
+  catchupThreshold: 6
+  catchupMultiplier: 0.1
+  showGizmos: 0
+  showOverlay: 0
+  overlayColor: {r: 0, g: 0, b: 0, a: 0.5}
+  target: {fileID: 5857995047061650703}
 --- !u!114 &6704791337475181913
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -505,7 +536,6 @@ MonoBehaviour:
   syncInterval: 0.1
   TargetingManager: {fileID: 1278074243721144698}
   ProjectileOrigin: {fileID: 5703433060494341136}
-  CapsuleShooter: {fileID: 2094177133407296794}
 --- !u!1 &823641613475923877
 GameObject:
   m_ObjectHideFlags: 0

@@ -27,6 +27,9 @@ public class PlayerAbilityTargetingManager : NetworkBehaviour
 
     private void Update()
     {
+        if (!hasAuthority)
+            return;
+
         Ray ray = Utilities.CameraRaycast();
         if (Physics.Raycast(ray, out var hitInfo, Mathf.Infinity, _groundMask))
         {

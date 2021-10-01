@@ -10,8 +10,7 @@ public partial class CardData : ScriptableObject
     public Sprite CardArt;
     public float RangeModifier = 1;
     public CardType Type;
-
-    public CardIndicatorType IndicatorType { get; protected set; }
+    public CardIndicatorType IndicatorType = CardIndicatorType.None;
 
     public virtual CardNetworkData GetNetworkData(CardNetworkData data)
     {

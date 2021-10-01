@@ -22,7 +22,6 @@ class PlayerDeckManager : CardCollectionBase
     private void Start()
     {
         _rng = new System.Random();
-        TestDeckDatas.Add(Resources.Load<CardData>("Cards/CardData/RangedProjectile/Capsule Shot Green"));
         BuildTestDeck();
     }
 
