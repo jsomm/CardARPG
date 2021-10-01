@@ -14,7 +14,6 @@ GameObject:
   - component: {fileID: 7587758742213839752}
   - component: {fileID: 2654599090351067607}
   - component: {fileID: 7645071100644722394}
-  - component: {fileID: 1178843259054066012}
   - component: {fileID: 8518937644815073004}
   m_Layer: 0
   m_Name: CapsuleProjectile
@@ -133,35 +132,6 @@ MonoBehaviour:
   visible: 0
   m_AssetId: a3d892ca6ad6f914eb05613ce0e60cb7
   hasSpawned: 0
---- !u!114 &1178843259054066012
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 898273679843977332}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2f74aedd71d9a4f55b3ce499326d45fb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  syncMode: 0
-  syncInterval: 0.1
-  clientAuthority: 0
-  sendInterval: 0.05
-  syncPosition: 1
-  syncRotation: 1
-  syncScale: 0
-  interpolatePosition: 1
-  interpolateRotation: 1
-  interpolateScale: 1
-  bufferTimeMultiplier: 3
-  bufferSizeLimit: 64
-  catchupThreshold: 6
-  catchupMultiplier: 0.1
-  showGizmos: 0
-  showOverlay: 0
-  overlayColor: {r: 0, g: 0, b: 0, a: 0.5}
 --- !u!114 &8518937644815073004
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -176,6 +146,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   syncMode: 0
   syncInterval: 0.1
-  destroyAfter: 5
-  rigidBody: {fileID: 2654599090351067607}
-  force: 1000
+  DestroyAfter: 5
+  Force: 1000

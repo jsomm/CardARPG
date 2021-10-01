@@ -2,6 +2,8 @@ using System;
 
 using Mirror;
 
+using TMPro;
+
 using UnityEngine;
 
 public class CardPlayer : CardPlayerStateMachine
@@ -83,24 +85,25 @@ public class CardPlayer : CardPlayerStateMachine
     }
 
     [Server]
-    private void PlayRangedProjectileCard(CardNetworkData card)
-    {
-        GameObject prefab = NetworkManager.singleton.spawnPrefabs[card.ProjectileID];
-        GameObject projectile = Instantiate(prefab, ProjectileOrigin.position, ProjectileOrigin.rotation);
-        NetworkServer.Spawn(projectile);
-    }
+    private void PlayRangedProjectileCard(CardNetworkData card) => SpawnPrefabOnServer(card.ProjectileID, ProjectileOrigin.position, ProjectileOrigin.rotation);
 
     [Server]
     private void PlayRangedAOECard(CardNetworkData card)
     {
-        GameObject prefab = NetworkManager.singleton.spawnPrefabs[card.ProjectileID];
         Vector3 targetPosition = TargetingManager.AoeIndicatorTransform.position;
         targetPosition.y = 0;
 
-        GameObject projectile = Instantiate(prefab, targetPosition, TargetingManager.AoeIndicatorTransform.rotation);
-        NetworkServer.Spawn(projectile);
+        SpawnPrefabOnServer(card.ProjectileID, targetPosition, TargetingManager.AoeIndicatorTransform.rotation);
     }
 
     [Server]
     private void PlayBuffCard(CardNetworkData card) => throw new NotImplementedException();
+
+    [Server]
+    public void SpawnPrefabOnServer(int prefabID, Vector3 position, Quaternion rotation)
+    {
+        GameObject prefab = NetworkManager.singleton.spawnPrefabs[prefabID];
+        GameObject projectile = Instantiate(prefab, position, rotation);
+        NetworkServer.Spawn(projectile);
+    }
 }
