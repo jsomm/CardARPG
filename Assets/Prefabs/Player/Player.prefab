@@ -262,7 +262,6 @@ GameObject:
   - component: {fileID: 2703598044193703794}
   - component: {fileID: 3654304057529457781}
   - component: {fileID: 271599310451093652}
-  - component: {fileID: 2094177133407296794}
   - component: {fileID: 1331057230630823119}
   - component: {fileID: 1278074243721144698}
   - component: {fileID: 7829498939139891456}
@@ -463,23 +462,6 @@ MonoBehaviour:
   syncInterval: 0.1
   _cameraPrefab: {fileID: 256983299217291026, guid: e15274dd3068bcf4ba496776d580d8a2, type: 3}
   _followTarget: {fileID: 4789144412124918195}
---- !u!114 &2094177133407296794
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 803845908290828281}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b8003eb6b6239cd4080acdb52e385df0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  syncMode: 0
-  syncInterval: 0.1
-  _projectilePrefab: {fileID: 898273679843977332, guid: a3d892ca6ad6f914eb05613ce0e60cb7, type: 3}
-  _animator: {fileID: 8784043835307389386}
-  _projectileOrigin: {fileID: 5703433060494341136}
 --- !u!114 &1331057230630823119
 MonoBehaviour:
   m_ObjectHideFlags: 0
