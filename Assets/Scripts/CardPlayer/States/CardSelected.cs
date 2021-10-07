@@ -16,6 +16,7 @@ public class CardSelected : CardPlayerState
         _selectedCardData = CardPlayer.LastSlotPressed.CardCurrentlyInSlot.CardData;
 
         // TODO: activate some kind of effect on the last slot pressed to indicate what card is selected
+        CardPlayer.LastSlotPressed.CardCurrentlyInSlot.ToggleCardHighlight();
 
         // display targeting indicators for the selected card
         CardPlayer.TargetingManager.ShowIndicatorForCard(_selectedCardData);
@@ -27,7 +28,7 @@ public class CardSelected : CardPlayerState
         if (CardPlayer.LastSlotPressed == CardPlayer.DetermineSlotFromKeybindName(obj.action.name))
         {
             // play the card
-            // if (CanPlayCardInSlot(CardPlayer.LastSlotPressed))
+            if (CanPlayCardInSlot(CardPlayer.LastSlotPressed))
                 PlayCardInSlot();
         }
         // either we played the card or the user pressed a different button than initially pressed, so lets go back to normal gameplay state
@@ -36,25 +37,24 @@ public class CardSelected : CardPlayerState
 
     public override void MouseClicked(InputAction.CallbackContext obj)
     {
-        // if the mouse is in the play area and the player has enough mana, play the card
-        // if (CardPlayer.CardPlayArea.MouseIsInPlayArea && CanPlayCardInSlot(CardPlayer.LastSlotPressed))
+        if (CanPlayCardInSlot(CardPlayer.LastSlotPressed))
             PlayCardInSlot();
 
         // back to normal gameplay
         CardPlayer.SetState(new Gameplay(CardPlayer));
     }
 
-    //private bool CanPlayCardInSlot(CardUISlot slot)
-    //{
-    //    // if we have enough mana for the card return true
-    //    if (CardPlayer.ResourceBarManager.CurrentMana >= slot.CardDisplay.CardData.Cost)
-    //        return true;
-    //    else
-    //    {
-    //        Debug.Log("Not enough mana!");
-    //        return false;
-    //    }
-    //}
+    private bool CanPlayCardInSlot(CardUISlot slot)
+    {
+        // if we have enough mana for the card return true
+        if (CardPlayer.ManaBar.CurrentManaPoints.Count >= slot.CardCurrentlyInSlot.CardData.Cost)
+            return true;
+        else
+        {
+            Debug.Log("Not enough mana!");
+            return false;
+        }
+    }
 
     private void PlayCardInSlot()
     {
@@ -62,13 +62,19 @@ public class CardSelected : CardPlayerState
         CardNetworkData data = CardPlayer.LastSlotPressed.CardCurrentlyInSlot.CardData.GetNetworkData(new CardNetworkData());
 
         // use mana
-        // CardPlayer.ResourceBarManager.ChangeResource(CardPlayer.ResourceBarManager.ManaBar, cardData.Cost);
+        CardPlayer.ManaBar.ConsumeMana(data.Cost);
 
         // play the card
         CardPlayer.CmdPlayCard(data);
 
+        // remove the selected effect from the card
+        CardPlayer.LastSlotPressed.CardCurrentlyInSlot.ToggleCardHighlight();
+
         // remove the card from the hand
         CardPlayer.PlayerHand.RemoveCardFromCollection(CardPlayer.LastSlotPressed.CardCurrentlyInSlot);
+
+        // replace the card we just played
+        CardPlayer.PlayerDeck.Draw(1);
     }
 }
 

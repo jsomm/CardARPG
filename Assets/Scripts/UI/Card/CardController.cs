@@ -15,9 +15,11 @@ public class CardController : MonoBehaviour
     [SerializeField] GameObject _cardFront;
     [SerializeField] CardData _cardData;
     [SerializeField] CardDragDrop _dragDrop;
+    [SerializeField] GameObject _cardHighlight;
 
     // properties
     public bool IsFaceUp => _cardFront.activeSelf;
+    public bool IsHighlighted => _cardHighlight.activeSelf;
     public CardData CardData
     {
         get => _cardData != null ? _cardData : Resources.Load<CardData>("Cards/_Default");
@@ -91,5 +93,10 @@ public class CardController : MonoBehaviour
             _image.sprite = CardData.CardArt;
         else
             _image.gameObject.SetActive(false);
+    }
+
+    public void ToggleCardHighlight()
+    {
+        _cardHighlight.SetActive(!_cardHighlight.activeSelf);
     }
 }

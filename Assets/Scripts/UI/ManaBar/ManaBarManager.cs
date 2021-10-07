@@ -17,7 +17,7 @@ public class ManaBarManager : MonoBehaviour
     RectTransform _backgroundRect;
     List<ManaPoint> _manaPoints;
 
-    List<ManaPoint> _currentManaPoints => _manaPoints.FindAll(x => !x.IsExpended);
+    public List<ManaPoint> CurrentManaPoints => _manaPoints.FindAll(x => !x.IsExpended);
 
 
     Vector2 _padding;
@@ -68,13 +68,13 @@ public class ManaBarManager : MonoBehaviour
 
     public bool ConsumeMana(int amount)
     {
-        if (amount > _currentManaPoints.Count)
+        if (amount > CurrentManaPoints.Count)
             return false; // not enough mana
         else
         {
             for (int i = 0; i < amount; i++)
             {
-                _currentManaPoints[(_currentManaPoints.Count - 1)].Consume();
+                CurrentManaPoints[(CurrentManaPoints.Count - 1)].Consume();
             }
             return true;
         }
@@ -82,13 +82,13 @@ public class ManaBarManager : MonoBehaviour
 
     public void ConsumeManaTest(int amount)
     {
-        if (amount > _currentManaPoints.Count)
+        if (amount > CurrentManaPoints.Count)
             return; // not enough mana
         else
         {
             for (int i = 0; i < amount; i++)
             {
-                _currentManaPoints[(_currentManaPoints.Count - 1)].Consume();
+                CurrentManaPoints[(CurrentManaPoints.Count - 1)].Consume();
             }
         }
     }

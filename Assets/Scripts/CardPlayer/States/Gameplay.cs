@@ -9,8 +9,13 @@ public class Gameplay : CardPlayerState
 
     public override void Start()
     {
-        // TODO: remove selected effect on card in previously selected slot
-        CardPlayer.LastSlotPressed = null;
+        if (CardPlayer.LastSlotPressed != null)
+        {
+            // turn off the highlight if we have a highlighted card
+            if (CardPlayer.LastSlotPressed.CardCurrentlyInSlot.IsHighlighted)
+                CardPlayer.LastSlotPressed.CardCurrentlyInSlot.ToggleCardHighlight();
+            CardPlayer.LastSlotPressed = null;
+        }
 
         // hide targeting indicators
         CardPlayer.TargetingManager.HideIndicators();

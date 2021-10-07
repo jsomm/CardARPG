@@ -23,6 +23,7 @@ class PlayerDeckManager : CardCollectionBase
     {
         _rng = new System.Random();
         BuildTestDeck();
+        Draw(_playerHand.CardSlots.Count); // fill the hand
     }
 
     private void BuildTestDeck()

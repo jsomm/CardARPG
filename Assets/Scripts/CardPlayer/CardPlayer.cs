@@ -14,19 +14,24 @@ public class CardPlayer : CardPlayerStateMachine
     public PlayerAbilityTargetingManager TargetingManager;
     public Transform ProjectileOrigin;
 
-    private PlayerHandManager _playerHand;
-    private CardUISlot _lastSlotPressed = null;
+    ManaBarManager _manaBar;
+    PlayerDeckManager _playerDeck;
+    PlayerHandManager _playerHand;
+    CardUISlot _lastSlotPressed = null;
 
-    public CardUISlot LastSlotPressed { get => _lastSlotPressed; set => _lastSlotPressed = value; }
-    public PlayerHandManager PlayerHand { get => _playerHand; set => _playerHand = value; }
+    internal ManaBarManager ManaBar { get => _manaBar; }
+    internal PlayerDeckManager PlayerDeck { get => _playerDeck; }
+    internal PlayerHandManager PlayerHand { get => _playerHand; }
+    internal CardUISlot LastSlotPressed { get => _lastSlotPressed; set => _lastSlotPressed = value; }
 
     Controls _controls;
-    public Controls Controls => _controls ??= new Controls();
+    Controls Controls => _controls ??= new Controls();
 
     public override void OnStartAuthority()
     {
+        _playerDeck = GameObject.Find("Player Deck").GetComponent<PlayerDeckManager>();
         _playerHand = GameObject.Find("Player Hand").GetComponent<PlayerHandManager>();
-        // ResourceBarManager = GameObject.Find("Resource Bars").GetComponent<ResourceBarManager>();
+        _manaBar = GameObject.Find("Mana Bar").GetComponent<ManaBarManager>();
         SetState(new Gameplay(this));
 
         Controls.PlayerControls.AbilityOne.performed += HandleAbilityButtonPressed;
@@ -82,6 +87,7 @@ public class CardPlayer : CardPlayerStateMachine
                 PlayBuffCard(card);
                 break;
         }
+
     }
 
     [Server]
