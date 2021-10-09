@@ -17,6 +17,9 @@ public class CardController : MonoBehaviour
     [SerializeField] CardDragDrop _dragDrop;
     [SerializeField] GameObject _cardHighlight;
 
+    [Header("Only Used for Menu Cards")]
+    public GameObject ParentCard;
+
     // properties
     public bool IsFaceUp => _cardFront.activeSelf;
     public bool IsHighlighted => _cardHighlight.activeSelf;
@@ -95,8 +98,5 @@ public class CardController : MonoBehaviour
             _image.gameObject.SetActive(false);
     }
 
-    public void ToggleCardHighlight()
-    {
-        _cardHighlight.SetActive(!_cardHighlight.activeSelf);
-    }
+    public void ToggleCardHighlight() => _cardHighlight.SetActive(!_cardHighlight.activeSelf);
 }

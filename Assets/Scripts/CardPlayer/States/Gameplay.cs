@@ -9,6 +9,12 @@ public class Gameplay : CardPlayerState
 
     public override void Start()
     {
+        // if there are any empty slots, draw till full
+        if (CardPlayer.PlayerHand.NumOfEmptySlots > 0)
+        {
+            CardPlayer.PlayerDeck.Draw(CardPlayer.PlayerHand.NumOfEmptySlots);
+        }
+
         if (CardPlayer.LastSlotPressed != null)
         {
             // turn off the highlight if we have a highlighted card

@@ -9,8 +9,8 @@ class PlayerDeckManager : CardCollectionBase
 {
     [Header("References")]
     public List<CardController> CardsInDeck;
-    [SerializeField] TMP_Text _deckCountText;
-    [SerializeField] Transform _cardsInDeckParentObject; // this is for organization in the hierarchy
+    public Transform CardsInDeckParent; // this is for organization in the hierarchy
+    [SerializeField] TMP_Text _deckCountText, _deckViewCountText;
     [SerializeField] PlayerHandManager _playerHand;
     [SerializeField] PlayerDiscardManager _playerDiscard;
 
@@ -23,7 +23,6 @@ class PlayerDeckManager : CardCollectionBase
     {
         _rng = new System.Random();
         BuildTestDeck();
-        Draw(_playerHand.CardSlots.Count); // fill the hand
     }
 
     private void BuildTestDeck()
@@ -41,7 +40,7 @@ class PlayerDeckManager : CardCollectionBase
 
             // make the remainders first
             if (i < remainder)
-                newCard = cardCreator.CreateCardObject(TestDeckDatas[_rng.Next(TestDeckDatas.Count)], _cardsInDeckParentObject); // remainders will just be randomized from all available cards
+                newCard = cardCreator.CreateCardObject(TestDeckDatas[_rng.Next(TestDeckDatas.Count)], CardsInDeckParent); // remainders will just be randomized from all available cards
             else
             {
                 if (numCreated != numOfEachCard)
@@ -52,7 +51,7 @@ class PlayerDeckManager : CardCollectionBase
                     currentCardIndex++;
                 }
 
-                newCard = cardCreator.CreateCardObject(TestDeckDatas[currentCardIndex], _cardsInDeckParentObject);
+                newCard = cardCreator.CreateCardObject(TestDeckDatas[currentCardIndex], CardsInDeckParent);
             }
 
             // disable to hide card
@@ -107,12 +106,16 @@ class PlayerDeckManager : CardCollectionBase
         }
     }
 
-    void UpdateCardCount() => _deckCountText.text = CardsInDeck.Count.ToString();
+    void UpdateCardCount()
+    {
+        _deckCountText.text = CardsInDeck.Count.ToString();
+        _deckViewCountText.text = _deckCountText.text;
+    }
 
     public override bool AddCardToCollection(CardController cardToAdd)
     {
         // set parent
-        cardToAdd.transform.SetParent(_cardsInDeckParentObject);
+        cardToAdd.transform.SetParent(CardsInDeckParent);
 
         // add card data
         CardsInDeck.Add(cardToAdd);

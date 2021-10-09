@@ -10,25 +10,14 @@ public class ManaBarManager : MonoBehaviour
     [SerializeField] GameObject _manaPointPrefab;
 
     [Header("Configuration Options")]
-    [SerializeField] float _paddingBetweenPoints = 5;
-    [SerializeField] float _paddingFromLeftSideOfScreen = 10;
     public int MaxManaPoints = 5;
-
-    RectTransform _backgroundRect;
     List<ManaPoint> _manaPoints;
 
     public List<ManaPoint> CurrentManaPoints => _manaPoints.FindAll(x => !x.IsExpended);
 
-
-    Vector2 _padding;
-
-    private void Awake() => _backgroundRect = GetComponent<RectTransform>();
-
     private void Start()
     {
         _manaPoints = new List<ManaPoint>();
-        _padding = new Vector2((_paddingBetweenPoints + _manaPointPrefab.GetComponent<RectTransform>().rect.width), 0);
-
         CreateManaBar();
     }
 
@@ -41,22 +30,8 @@ public class ManaBarManager : MonoBehaviour
     }
 
     public void AddPointToBar()
-    {
-        _backgroundRect.sizeDelta += _padding;
-        GameObject newManaPoint = Instantiate(_manaPointPrefab, _backgroundRect);
-
-        if (_manaPoints.Count <= 0)
-        {
-            _backgroundRect.sizeDelta += new Vector2(_paddingBetweenPoints, 0);
-            newManaPoint.GetComponent<RectTransform>().anchoredPosition = new Vector2((5 + _paddingBetweenPoints), 0);
-        }
-        else
-        {
-            Vector2 previousPointPosition = _manaPoints[_manaPoints.Count - 1].gameObject.GetComponent<RectTransform>().anchoredPosition;
-            newManaPoint.GetComponent<RectTransform>().anchoredPosition = previousPointPosition + _padding;
-        }
-
-        _backgroundRect.anchoredPosition = new Vector2((_backgroundRect.sizeDelta.x / 2) + _paddingFromLeftSideOfScreen, 0);
+    {       
+        GameObject newManaPoint = Instantiate(_manaPointPrefab, transform);
         _manaPoints.Add(newManaPoint.GetComponent<ManaPoint>());
     }
 
@@ -77,19 +52,6 @@ public class ManaBarManager : MonoBehaviour
                 CurrentManaPoints[(CurrentManaPoints.Count - 1)].Consume();
             }
             return true;
-        }
-    }
-
-    public void ConsumeManaTest(int amount)
-    {
-        if (amount > CurrentManaPoints.Count)
-            return; // not enough mana
-        else
-        {
-            for (int i = 0; i < amount; i++)
-            {
-                CurrentManaPoints[(CurrentManaPoints.Count - 1)].Consume();
-            }
         }
     }
 }

@@ -11,6 +11,8 @@ public class PlayerHandManager : CardCollectionBase
     public List<CardController> CardsInHand;
     public List<CardUISlot> CardSlots;
 
+    public int NumOfEmptySlots => CardSlots.FindAll(x => x.CardCurrentlyInSlot == null).Count;
+
     public override bool AddCardToCollection(CardController cardToAdd)
     {
         // find the first unoccupied slot to put the new card in
