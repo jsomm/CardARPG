@@ -31,7 +31,7 @@ public class CardPlayer : CardPlayerStateMachine
     {
         _playerDeck = GameObject.Find("Player Deck").GetComponent<PlayerDeckManager>();
         _playerHand = GameObject.Find("Player Hand").GetComponent<PlayerHandManager>();
-        _manaBar = GameObject.Find("Mana Bar").GetComponent<ManaBarManager>();
+        _manaBar = GameObject.Find("Mana").GetComponent<ManaBarManager>();
         SetState(new Gameplay(this));
 
         Controls.PlayerControls.AbilityOne.performed += HandleAbilityButtonPressed;

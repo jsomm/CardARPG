@@ -11,8 +11,8 @@ public class ManaBarManager : MonoBehaviour
 
     [Header("Configuration Options")]
     public int MaxManaPoints = 5;
-    List<ManaPoint> _manaPoints;
 
+    List<ManaPoint> _manaPoints;
     public List<ManaPoint> CurrentManaPoints => _manaPoints.FindAll(x => !x.IsExpended);
 
     private void Start()
