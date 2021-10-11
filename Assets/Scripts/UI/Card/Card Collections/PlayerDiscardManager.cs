@@ -6,12 +6,10 @@ using UnityEngine;
 
 public class PlayerDiscardManager : CardCollectionBase
 {
-    public List<CardController> CardsInDiscard;
-
     [Header("References")]
     [SerializeField] PlayerDeckManager _playerDeck;
     [SerializeField] Transform _cardsInDiscardParentObject; // this is for organization in the hierarchy
-    [SerializeField] TMP_Text _discardCountText;
+    [SerializeField] TMP_Text _discardCountText, _discardViewCountText;
 
     private void Start() => UpdateCardCount();
 
@@ -21,7 +19,7 @@ public class PlayerDiscardManager : CardCollectionBase
         cardToAdd.gameObject.transform.SetParent(_cardsInDiscardParentObject);
 
         // add card data
-        CardsInDiscard.Add(cardToAdd);
+        Cards.Add(cardToAdd);
 
         // set inactive to hide card
         cardToAdd.gameObject.SetActive(false);
@@ -33,9 +31,9 @@ public class PlayerDiscardManager : CardCollectionBase
 
     public override bool RemoveCardFromCollection(CardController cardToRemove)
     {
-        if (CardsInDiscard.Contains(cardToRemove))
+        if (Cards.Contains(cardToRemove))
         {
-            CardsInDiscard.Remove(cardToRemove);
+            Cards.Remove(cardToRemove);
             UpdateCardCount();
             return true;
         }
@@ -43,11 +41,15 @@ public class PlayerDiscardManager : CardCollectionBase
             return false; // we couldn't find the card
     }
 
-    void UpdateCardCount() => _discardCountText.text = CardsInDiscard.Count.ToString();
+    void UpdateCardCount()
+    {
+        _discardCountText.text = Cards.Count.ToString();
+        _discardViewCountText.text = _discardCountText.text;
+    }
 
     public void ReturnCardsToDeck()
     {
-        List<CardController> cardReturnList = CardsInDiscard.GetRange(0, CardsInDiscard.Count); // clone the list so we can remove all the old elements and still return them to the deck
+        List<CardController> cardReturnList = Cards.GetRange(0, Cards.Count); // clone the list so we can remove all the old elements and still return them to the deck
         foreach (CardController card in cardReturnList)
         {
             _playerDeck.AddCardToCollection(card);

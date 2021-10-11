@@ -10,10 +10,9 @@ public class ManaPoint : MonoBehaviour
     public float RechargeModifier = 1;
     public bool IsExpended => _currentVal < _maxVal;
 
-    float _maxVal = 100;
+    readonly float _maxVal = 100;
     float _currentVal;
-
-    WaitForSeconds _regenTick = new WaitForSeconds(0.1f);
+    readonly WaitForSeconds _regenTick = new WaitForSeconds(0.1f);
 
     private void Start()
     {

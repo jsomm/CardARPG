@@ -298,4 +298,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Slider: {fileID: 4609049933728983642}
-  RechargeModifier: 1
+  RegenModifier: 1
+  RegenDelay: 2

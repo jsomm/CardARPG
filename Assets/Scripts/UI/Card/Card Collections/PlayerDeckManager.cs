@@ -8,7 +8,6 @@ using UnityEngine;
 class PlayerDeckManager : CardCollectionBase
 {
     [Header("References")]
-    public List<CardController> CardsInDeck;
     public Transform CardsInDeckParent; // this is for organization in the hierarchy
     [SerializeField] TMP_Text _deckCountText, _deckViewCountText;
     [SerializeField] PlayerHandManager _playerHand;
@@ -17,13 +16,7 @@ class PlayerDeckManager : CardCollectionBase
     [Header("Debug")]
     public List<CardData> TestDeckDatas;
 
-    System.Random _rng;
-
-    private void Start()
-    {
-        _rng = new System.Random();
-        BuildTestDeck();
-    }
+    private void Start() => BuildTestDeck();
 
     private void BuildTestDeck()
     {
@@ -64,28 +57,14 @@ class PlayerDeckManager : CardCollectionBase
         Shuffle();
     }
 
-    public void Shuffle()
-    {
-        _rng = new System.Random();
-        int n = CardsInDeck.Count;
-        while (n > 1)
-        {
-            n--;
-            int k = _rng.Next(n + 1);
-            CardController value = CardsInDeck[k];
-            CardsInDeck[k] = CardsInDeck[n];
-            CardsInDeck[n] = value;
-        }
-    }
-
     public void Draw(int numberOfCardsToDraw)
     {
-        if (numberOfCardsToDraw > CardsInDeck.Count) // the player wants to draw more than we have in the deck
+        if (numberOfCardsToDraw > Cards.Count) // the player wants to draw more than we have in the deck
         {
-            if (CardsInDeck.Count > 0) // we still have cards for them to draw before we shuffle in the discard
+            if (Cards.Count > 0) // we still have cards for them to draw before we shuffle in the discard
             {
-                numberOfCardsToDraw -= CardsInDeck.Count;
-                Draw(CardsInDeck.Count); // draw the rest in the deck                
+                numberOfCardsToDraw -= Cards.Count;
+                Draw(Cards.Count); // draw the rest in the deck                
             }
 
             // now shuffle in the discard pile
@@ -96,9 +75,9 @@ class PlayerDeckManager : CardCollectionBase
 
         for (int i = 0; i < numberOfCardsToDraw; i++)
         {
-            if (_playerHand.AddCardToCollection(CardsInDeck[0])) // if we successfully add the card to the player's hand
+            if (_playerHand.AddCardToCollection(Cards[0])) // if we successfully add the card to the player's hand
             {
-                RemoveCardFromCollection(CardsInDeck[0]);
+                RemoveCardFromCollection(Cards[0]);
                 UpdateCardCount();
             }
             else
@@ -108,7 +87,7 @@ class PlayerDeckManager : CardCollectionBase
 
     void UpdateCardCount()
     {
-        _deckCountText.text = CardsInDeck.Count.ToString();
+        _deckCountText.text = Cards.Count.ToString();
         _deckViewCountText.text = _deckCountText.text;
     }
 
@@ -118,7 +97,7 @@ class PlayerDeckManager : CardCollectionBase
         cardToAdd.transform.SetParent(CardsInDeckParent);
 
         // add card data
-        CardsInDeck.Add(cardToAdd);
+        Cards.Add(cardToAdd);
 
         // set deck counter text
         UpdateCardCount();
@@ -128,7 +107,7 @@ class PlayerDeckManager : CardCollectionBase
 
     public override bool RemoveCardFromCollection(CardController cardToRemove)
     {
-        CardsInDeck.Remove(cardToRemove);
+        Cards.Remove(cardToRemove);
         UpdateCardCount();
         return true;
     }

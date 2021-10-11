@@ -14,14 +14,14 @@ public class HealthBarManager : MonoBehaviour
 
     private List<HealthBar> _barsWithHealth => _healthBars.FindAll(x => !x.IsExpended);
 
-    List<HealthBar> _healthBars = new List<HealthBar>();
+    readonly List<HealthBar> _healthBars = new List<HealthBar>();
 
     private void Start() => InitializeHealth();
-    
+
     void InitializeHealth()
     {
         for (int i = 0; i < _numOfHealthBars; i++)
-            AddHealthBar();        
+            AddHealthBar();
     }
 
     public void ChangeMaxHealth(int delta)
@@ -34,7 +34,6 @@ public class HealthBarManager : MonoBehaviour
             else
                 AddHealthBar();
         }
-
     }
 
     private void AddHealthBar()
@@ -55,9 +54,12 @@ public class HealthBarManager : MonoBehaviour
             bar.StopRegen();
 
         float dmgRemainder = _barsWithHealth[_barsWithHealth.Count - 1].TakeDamage(dmgAmount);
-        if (dmgRemainder > 0)
+
+        if (_barsWithHealth.Count == 0) // did the player die?
+            Debug.Log("YOU DIED! :O");
+        else if (dmgRemainder > 0)      // is there more damage to take?
             TakeDamage(dmgRemainder);
-        else
+        else                            // we survived.. start regen
             _barsWithHealth[_barsWithHealth.Count - 1].StartRegen();
     }
 }

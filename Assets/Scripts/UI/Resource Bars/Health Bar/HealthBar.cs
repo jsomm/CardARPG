@@ -7,16 +7,16 @@ public class HealthBar : MonoBehaviour
 {
     public Slider Slider;
     // add mana type or color here?
-    public float RechargeModifier = 1;
+    public float RegenModifier = 1f;
+    public float RegenDelay = 4f;
 
     public bool IsExpended => _currentVal == 0;
-    public bool IsRegen { get => _isRegen; }
+    public bool IsRegen => _isRegen;
 
-    float _maxVal = 50;
+    readonly float _maxVal = 50;
     float _currentVal;
     bool _isRegen = false;
-
-    WaitForSeconds _regenTick = new WaitForSeconds(0.1f);
+    readonly WaitForSeconds _regenTick = new WaitForSeconds(0.1f);
 
     private void Start()
     {
@@ -43,6 +43,7 @@ public class HealthBar : MonoBehaviour
     }
 
     public void StartRegen() => StartCoroutine(Regen());
+
     public void StopRegen()
     {
         StopAllCoroutines();
@@ -52,14 +53,15 @@ public class HealthBar : MonoBehaviour
     IEnumerator Regen()
     {
         _isRegen = true;
-        yield return new WaitForSeconds(5f);
+        yield return new WaitForSeconds(RegenDelay);
 
         while (_currentVal < _maxVal)
         {
-            _currentVal += _maxVal / (25 / RechargeModifier);
+            _currentVal += _maxVal / (25 / RegenModifier);
             Slider.value = _currentVal;
             yield return _regenTick;
         }
+
         _isRegen = false;
     }
 }

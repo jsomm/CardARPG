@@ -8,7 +8,6 @@ public class PlayerHandManager : CardCollectionBase
     [Header("References")]
     [SerializeField] PlayerDiscardManager _playerDiscard;
 
-    public List<CardController> CardsInHand;
     public List<CardUISlot> CardSlots;
 
     public int NumOfEmptySlots => CardSlots.FindAll(x => x.CardCurrentlyInSlot == null).Count;
@@ -25,7 +24,7 @@ public class PlayerHandManager : CardCollectionBase
             cardToAdd.gameObject.SetActive(true);
 
             // add data to list of cards in hand
-            CardsInHand.Add(cardToAdd);
+            Cards.Add(cardToAdd);
 
             // tell the card's dragdrop where we are and allow dragging                
             CardDragDrop dragDrop = cardToAdd.DragDrop;
@@ -47,14 +46,14 @@ public class PlayerHandManager : CardCollectionBase
 
     public override bool RemoveCardFromCollection(CardController cardToRemove)
     {
-        if (CardsInHand.Contains(cardToRemove))
+        if (Cards.Contains(cardToRemove))
         {
             // flip card face down
             cardToRemove.QuickFlip();
 
             // remove the card from the hand slot, the hand data list, and send it to the discard pile
             cardToRemove.CurrentSlot.RemoveCardFromSlot();
-            CardsInHand.Remove(cardToRemove);            
+            Cards.Remove(cardToRemove);            
 
             // send the card to the discard pile
             _playerDiscard.AddCardToCollection(cardToRemove);

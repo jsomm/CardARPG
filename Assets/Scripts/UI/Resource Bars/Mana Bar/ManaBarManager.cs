@@ -51,6 +51,7 @@ public class ManaBarManager : MonoBehaviour
             {
                 CurrentManaPoints[(CurrentManaPoints.Count - 1)].Consume();
             }
+
             return true;
         }
     }
