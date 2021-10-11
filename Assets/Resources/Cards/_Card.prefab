@@ -1222,12 +1222,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 56ea7dc6867952a448e4209d159f0e19, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _title: {fileID: 8841933955080562396}
-  _description: {fileID: 8841933954783202319}
-  _cost: {fileID: 8841933953561783389}
-  _image: {fileID: 8841933955080751075}
-  _cardBack: {fileID: 5681861338952277018}
-  _cardFront: {fileID: 6660769081833957614}
+  Title: {fileID: 8841933955080562396}
+  Description: {fileID: 8841933954783202319}
+  Cost: {fileID: 8841933953561783389}
+  Image: {fileID: 8841933955080751075}
+  CardBack: {fileID: 5681861338952277018}
+  CardFront: {fileID: 6660769081833957614}
+  CardHighlight: {fileID: 889726003415297619}
   _cardData: {fileID: 11400000, guid: 094c10face9874b42ac295cdf9d29555, type: 2}
   _dragDrop: {fileID: 2257509433181349890}
-  _cardHighlight: {fileID: 889726003415297619}

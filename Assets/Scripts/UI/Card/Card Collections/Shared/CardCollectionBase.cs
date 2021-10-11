@@ -11,16 +11,16 @@ public abstract class CardCollectionBase : MonoBehaviour
     public abstract bool AddCardToCollection(CardController cardToAdd);
     public abstract bool RemoveCardFromCollection(CardController cardToRemove);
 
-    protected System.Random _rng = new System.Random();
+    protected System.Random Rng = new System.Random();
 
     public void Shuffle()
     {
-        _rng = new System.Random();
+        Rng = new System.Random();
         int n = Cards.Count;
         while (n > 1)
         {
             n--;
-            int k = _rng.Next(n + 1);
+            int k = Rng.Next(n + 1);
             CardController value = Cards[k];
             Cards[k] = Cards[n];
             Cards[n] = value;

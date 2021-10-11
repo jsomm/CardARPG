@@ -514,6 +514,68 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 128193867}
   m_CullTransparentMesh: 1
+--- !u!1 &151190046
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 151190047}
+  - component: {fileID: 151190048}
+  m_Layer: 0
+  m_Name: Card Detail Slot
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &151190047
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 151190046}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 2, y: 2, z: 2}
+  m_Children: []
+  m_Father: {fileID: 341370847}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 272.1, y: 0}
+  m_SizeDelta: {x: 100, y: 128}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &151190048
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 151190046}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 30649d3a9faa99c48a7b1166b86bf2a0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Padding:
+    m_Left: 0
+    m_Right: 0
+    m_Top: 0
+    m_Bottom: 0
+  m_ChildAlignment: 0
+  m_Spacing: 0
+  m_ChildForceExpandWidth: 1
+  m_ChildForceExpandHeight: 1
+  m_ChildControlWidth: 0
+  m_ChildControlHeight: 0
+  m_ChildScaleWidth: 0
+  m_ChildScaleHeight: 0
+  m_ReverseArrangement: 0
 --- !u!1 &185653508
 GameObject:
   m_ObjectHideFlags: 0
@@ -886,6 +948,7 @@ RectTransform:
   - {fileID: 1957277076}
   - {fileID: 1709474692}
   - {fileID: 1150172703}
+  - {fileID: 151190047}
   m_Father: {fileID: 475379514}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -3130,12 +3193,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3b352c985d598a84cb7f1a5df96e9f5b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _viewTarget: {fileID: 185653510}
-  _scrollViewContentParent: {fileID: 306301681}
-  _GFXWrapper: {fileID: 1197754293}
-  _shuffleBeforeViewing: 0
-  _titleTextTMP: {fileID: 1057946605}
-  _titleText: Cards in Discard
+  ViewTarget: {fileID: 185653510}
+  ScrollViewContentParent: {fileID: 306301681}
+  GFXWrapper: {fileID: 1197754293}
+  ShuffleBeforeViewing: 0
+  TitleTextTMP: {fileID: 1057946605}
+  TitleText: Cards in Discard
 --- !u!1 &1150593867
 GameObject:
   m_ObjectHideFlags: 0
@@ -4491,12 +4554,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3b352c985d598a84cb7f1a5df96e9f5b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _viewTarget: {fileID: 1702306485993990621}
-  _scrollViewContentParent: {fileID: 1419237580}
-  _GFXWrapper: {fileID: 1560430645}
-  _shuffleBeforeViewing: 1
-  _titleTextTMP: {fileID: 1671599402}
-  _titleText: Cards in Deck
+  ViewTarget: {fileID: 1702306485993990621}
+  ScrollViewContentParent: {fileID: 1419237580}
+  GFXWrapper: {fileID: 1560430645}
+  ShuffleBeforeViewing: 1
+  TitleTextTMP: {fileID: 1671599402}
+  TitleText: Cards in Deck
 --- !u!1 &1727246990
 GameObject:
   m_ObjectHideFlags: 0

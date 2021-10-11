@@ -7,25 +7,22 @@ using System;
 public class CardController : MonoBehaviour
 {
     [Header("Component References")]
-    [SerializeField] TMP_Text _title;
-    [SerializeField] TMP_Text _description;
-    [SerializeField] TMP_Text _cost;
-    [SerializeField] Image _image;
-    [SerializeField] GameObject _cardBack;
-    [SerializeField] GameObject _cardFront;
-    [SerializeField] CardData _cardData;
-    [SerializeField] CardDragDrop _dragDrop;
-    [SerializeField] GameObject _cardHighlight;
-
-    [Header("Only Used for Menu Cards")]
-    public GameObject ParentCard;
+    [SerializeField] protected TMP_Text Title;
+    [SerializeField] protected TMP_Text Description;
+    [SerializeField] protected TMP_Text Cost;
+    [SerializeField] protected Image Image;
+    [SerializeField] protected GameObject CardBack;
+    [SerializeField] protected GameObject CardFront;
+    [SerializeField] protected GameObject CardHighlight;
+    [SerializeField] private protected CardData _cardData;
+    [SerializeField] private protected CardDragDrop _dragDrop;
 
     // properties
-    public bool IsFaceUp => _cardFront.activeSelf;
-    public bool IsHighlighted => _cardHighlight.activeSelf;
+    public bool IsFaceUp => CardFront.activeSelf;
+    public bool IsHighlighted => CardHighlight.activeSelf;
     public CardData CardData
     {
-        get => _cardData != null ? _cardData : Resources.Load<CardData>("Cards/_Default");
+        get => _cardData ?? Resources.Load<CardData>("Cards/_Default");
         set
         {
             _cardData = value;
@@ -41,8 +38,8 @@ public class CardController : MonoBehaviour
     public void QuickFlip()
     {
         // use this to flip without animation
-        _cardBack.SetActive(!_cardBack.activeSelf);
-        _cardFront.SetActive(!_cardBack.activeSelf);
+        CardBack.SetActive(!CardBack.activeSelf);
+        CardFront.SetActive(!CardBack.activeSelf);
     }
 
     public void FlipCard()
@@ -62,8 +59,8 @@ public class CardController : MonoBehaviour
                 transform.rotation = Quaternion.Euler(0f, i, 0f);
                 if (i == 90f)
                 {
-                    _cardFront.SetActive(true);
-                    _cardBack.SetActive(false);
+                    CardFront.SetActive(true);
+                    CardBack.SetActive(false);
                 }
 
                 yield return new WaitForSeconds(0.01f);
@@ -76,8 +73,8 @@ public class CardController : MonoBehaviour
                 transform.rotation = Quaternion.Euler(0f, i, 0f);
                 if (i == -90f)
                 {
-                    _cardFront.SetActive(false);
-                    _cardBack.SetActive(true);
+                    CardFront.SetActive(false);
+                    CardBack.SetActive(true);
                 }
 
                 yield return new WaitForSeconds(0.01f);
@@ -89,14 +86,14 @@ public class CardController : MonoBehaviour
 
     public void DisplayCardData()
     {
-        _title.text = CardData.Title;
-        _description.text = CardData.DescriptionText;
-        _cost.text = CardData.Cost.ToString();
+        Title.text = CardData.Title;
+        Description.text = CardData.DescriptionText;
+        Cost.text = CardData.Cost.ToString();
         if (CardData.CardArt != null)
-            _image.sprite = CardData.CardArt;
+            Image.sprite = CardData.CardArt;
         else
-            _image.gameObject.SetActive(false);
+            Image.gameObject.SetActive(false);
     }
 
-    public void ToggleCardHighlight() => _cardHighlight.SetActive(!_cardHighlight.activeSelf);
+    public void ToggleCardHighlight() => CardHighlight.SetActive(!CardHighlight.activeSelf);
 }

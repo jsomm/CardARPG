@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
 
 using TMPro;
 
@@ -7,40 +6,40 @@ using UnityEngine;
 
 public class CardCollectionViewManager : MonoBehaviour
 {
-    [SerializeField] protected CardCollectionBase _viewTarget;
-    [SerializeField] protected Transform _scrollViewContentParent;
-    [SerializeField] protected GameObject _GFXWrapper;
-    [SerializeField] protected bool _shuffleBeforeViewing = false;
-    [SerializeField] protected TMP_Text _titleTextTMP;
-    [SerializeField] protected string _titleText = "Cards in Deck";
+    [SerializeField] protected CardCollectionBase ViewTarget;
+    [SerializeField] protected Transform ScrollViewContentParent;
+    [SerializeField] protected GameObject GFXWrapper;
+    [SerializeField] protected bool ShuffleBeforeViewing = false;
+    [SerializeField] protected TMP_Text TitleTextTMP;
+    [SerializeField] protected string TitleText = "Cards in Deck";
 
-    protected CardCollectionBase _deck;
-    protected GameObject _deckViewCardPrefab;
-    protected List<CardController> _menuCards = new List<CardController>();
+    protected CardCollectionBase Deck;
+    protected GameObject DeckViewCardPrefab;
+    protected List<MenuCard> MenuCards = new List<MenuCard>();
 
-    protected bool _isOpen = false;
+    protected bool IsOpen = false;
 
     void Awake()
     {
-        _deckViewCardPrefab = Resources.Load<GameObject>("Cards/_MenuCard");
-        _deck = GameObject.Find("Player Deck").GetComponent<CardCollectionBase>();
+        DeckViewCardPrefab = Resources.Load<GameObject>("Cards/_MenuCard");
+        Deck = GameObject.Find("Player Deck").GetComponent<CardCollectionBase>();
     }
 
     private void Start()
     {
-        _titleTextTMP.text = _titleText;
+        TitleTextTMP.text = TitleText;
         CreateCardClonesFromDeck();
     }
 
     void CreateCardClonesFromDeck()
     {
-        foreach (CardController card in _deck.Cards)
+        foreach (CardController card in Deck.Cards)
         {
-            GameObject deckViewCard = Instantiate(_deckViewCardPrefab, _scrollViewContentParent);
-            CardController cardController = deckViewCard.GetComponent<CardController>();
-            cardController.CardData = card.CardData;
-            cardController.ParentCard = card.gameObject;
-            _menuCards.Add(cardController);
+            GameObject deckViewCard = Instantiate(DeckViewCardPrefab, ScrollViewContentParent);
+            MenuCard newMenuCard = deckViewCard.GetComponent<MenuCard>();
+            newMenuCard.CardData = card.CardData;
+            newMenuCard.ParentCard = card.gameObject;
+            MenuCards.Add(newMenuCard);
 
             deckViewCard.SetActive(false);
         }
@@ -48,38 +47,39 @@ public class CardCollectionViewManager : MonoBehaviour
 
     public void ToggleView()
     {
-        if (!_isOpen)
+        if (!IsOpen)
         {
-            _GFXWrapper.SetActive(true);
+            GFXWrapper.SetActive(true);
             ShowView();
         }
         else
         {
-            _GFXWrapper.SetActive(false);
+            GFXWrapper.SetActive(false);
             HideView();
         }
-        _isOpen = !_isOpen;
+
+        IsOpen = !IsOpen;
     }
 
     void ShowView()
     {
-        if (_shuffleBeforeViewing)
-            _viewTarget.Shuffle();
+        if (ShuffleBeforeViewing)
+            ViewTarget.Shuffle();
 
-        for (int i = 0; i < _viewTarget.Cards.Count; i++)
+        for (int i = 0; i < ViewTarget.Cards.Count; i++)
         {
-            CardController menuCard = _menuCards.Find(x => x.ParentCard == _viewTarget.Cards[i].gameObject);
+            CardController menuCard = MenuCards.Find(x => x.ParentCard == ViewTarget.Cards[i].gameObject);
             if (menuCard != null)
             {
                 menuCard.gameObject.SetActive(true);
-                if (!_shuffleBeforeViewing)
+                if (!ShuffleBeforeViewing)
                     menuCard.transform.SetSiblingIndex(i);
             }
         }
 
-        foreach (CardController card in _viewTarget.Cards)
+        foreach (CardController card in ViewTarget.Cards)
         {
-            CardController menuCard = _menuCards.Find(x => x.ParentCard == card.gameObject);
+            CardController menuCard = MenuCards.Find(x => x.ParentCard == card.gameObject);
             if (menuCard != null)
             {
                 menuCard.gameObject.SetActive(true);
@@ -89,7 +89,7 @@ public class CardCollectionViewManager : MonoBehaviour
 
     void HideView()
     {
-        foreach (CardController card in _menuCards)
+        foreach (CardController card in MenuCards)
         {
             card.gameObject.SetActive(false);
         }

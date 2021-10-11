@@ -9,20 +9,17 @@ using UnityEngine;
 public class CardPlayer : CardPlayerStateMachine
 {
     [Header("References")]
-    // public ResourceBarManager ResourceBarManager;
-    // public CardPlayArea CardPlayArea;
     public PlayerAbilityTargetingManager TargetingManager;
     public Transform ProjectileOrigin;
 
     ManaBarManager _manaBar;
     PlayerDeckManager _playerDeck;
     PlayerHandManager _playerHand;
-    CardUISlot _lastSlotPressed = null;
 
-    internal ManaBarManager ManaBar { get => _manaBar; }
-    internal PlayerDeckManager PlayerDeck { get => _playerDeck; }
-    internal PlayerHandManager PlayerHand { get => _playerHand; }
-    internal CardUISlot LastSlotPressed { get => _lastSlotPressed; set => _lastSlotPressed = value; }
+    internal ManaBarManager ManaBar => _manaBar;
+    internal PlayerDeckManager PlayerDeck => _playerDeck;
+    internal PlayerHandManager PlayerHand => _playerHand;
+    internal CardUISlot LastSlotPressed { get; set; } = null;
 
     Controls _controls;
     Controls Controls => _controls ??= new Controls();
@@ -87,7 +84,6 @@ public class CardPlayer : CardPlayerStateMachine
                 PlayBuffCard(card);
                 break;
         }
-
     }
 
     [Server]

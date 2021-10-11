@@ -14,6 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Title: Capsule Shot
   DescriptionText: Shoot a damaging capsule.
+  DetailText: Deals 50-75 damage to the first target hit.\n\n Using blue mana causes
+    the projectile to pierce through enemies and continue flying.
   Cost: 1
   CardArt: {fileID: 21300000, guid: a92713821d7b2c642913d0faa350b57e, type: 3}
   RangeModifier: 1

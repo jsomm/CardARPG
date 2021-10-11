@@ -33,7 +33,7 @@ class PlayerDeckManager : CardCollectionBase
 
             // make the remainders first
             if (i < remainder)
-                newCard = cardCreator.CreateCardObject(TestDeckDatas[_rng.Next(TestDeckDatas.Count)], CardsInDeckParent); // remainders will just be randomized from all available cards
+                newCard = cardCreator.CreateCardObject(TestDeckDatas[Rng.Next(TestDeckDatas.Count)], CardsInDeckParent); // remainders will just be randomized from all available cards
             else
             {
                 if (numCreated != numOfEachCard)

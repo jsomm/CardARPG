@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Title: Default
   DescriptionText: Default
+  DetailText: Default
   Cost: 0
   CardArt: {fileID: 21300000, guid: 4622c72801961084b942caad1cb99006, type: 3}
   RangeModifier: 1
